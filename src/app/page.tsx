@@ -1,6 +1,10 @@
-import { Mail, UploadCloud, User } from 'lucide-react'
-import { SettingsTabs } from './components/SettingsTabs'
+import { Mail } from 'lucide-react'
+import { SettingsTabs } from '@/app/components/Form/SettingsTabs'
 import * as Input from '@/app/components/Input'
+import * as FileInput from '@/app/components/Form/FileInput'
+import { Select } from './components/Form/Select'
+import { SelectItem } from './components/Form/Select/SelectItem'
+
 export default function Home() {
   return (
     <>
@@ -78,31 +82,12 @@ export default function Home() {
                 This will be displayed on your profile.
               </span>
             </label>
-            <div className="flex items-start gap-5">
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-violet-50">
-                <User className="h-8 w-8 text-violet-500" />
-              </div>
-              <label
-                htmlFor="photo"
-                className="hover:bg-violet-25 group flex flex-1 cursor-pointer flex-col items-center gap-3 rounded-lg border border-zinc-300 px-6 py-4 text-center text-zinc-500 shadow-sm hover:border-violet-50 hover:text-violet-500"
-              >
-                <div className="rounded-full border-6 border-zinc-100 bg-zinc-200 p-2 group-hover:border-violet-50 group-hover:bg-violet-100">
-                  <UploadCloud className="h-5 w-5 text-zinc-600 group-hover:text-violet-600" />
-                </div>
-                <div className="flex flex-col items-center gap-1">
-                  <span className="text-sm">
-                    <span className="font-semibold text-violet-700">
-                      Click to upload
-                    </span>{' '}
-                    or drag and drop
-                  </span>
-                  <span className="text-xs">
-                    SVG, PNG, JPG or GIF (max, 800x400px)
-                  </span>
-                </div>
-              </label>
-              <input type="file" className="sr-only" id="photo" />
-            </div>
+            <FileInput.Root className="flex items-start gap-5">
+              <FileInput.ImagePreview />
+              <FileInput.Trigger />
+              <FileInput.FileList />
+              <FileInput.Control />
+            </FileInput.Root>
           </div>
           <div className="grid grid-cols-form gap-3 pt-5">
             <label
@@ -122,7 +107,10 @@ export default function Home() {
             >
               Country
             </label>
-            <div></div>
+            <Select placeholder="Select a country...">
+              <SelectItem value="br" text="Brazil" />
+              <SelectItem value="us" text="United States" />
+            </Select>
           </div>
           <div className="grid grid-cols-form gap-3 pt-5">
             <label
@@ -131,7 +119,13 @@ export default function Home() {
             >
               Timezone
             </label>
-            <div></div>
+            <Select placeholder="Select a timezone...">
+              <SelectItem value="utc3" text="America São Paulo (UTC-03:00)" />
+              <SelectItem
+                value="utc8"
+                text="Pacific Standard Time (UTC-08:00)"
+              />
+            </Select>
           </div>
           <div className="grid grid-cols-form gap-3 pt-5">
             <label htmlFor="bio" className="text-sm font-medium text-zinc-700">
@@ -152,7 +146,10 @@ export default function Home() {
                 Share a few snippets of your work.
               </span>
             </label>
-            <div></div>
+            <FileInput.Root>
+              <FileInput.Trigger />
+              <FileInput.Control multiple />
+            </FileInput.Root>
           </div>
           <div className="flex items-center justify-end gap-2 pt-5">
             <button
