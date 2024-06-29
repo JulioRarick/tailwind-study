@@ -1,6 +1,6 @@
 export function Logo() {
   return (
-    <strong className="mx-1 flex items-center gap-2 text-xl">
+    <strong className="mx-1 flex items-center gap-2 text-xl dark:text-zinc-100">
       <svg
         height="20px"
         width="20px"
